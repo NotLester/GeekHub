@@ -25,9 +25,15 @@ export default function Page() {
           </div>
           <div className="space-y-5">
             <SignUpForm />
-            <Link href="/login" className="block text-center hover:underline">
-              Already have an account? Log in
-            </Link>
+            <p className="block text-center">
+              Already have an account?{" "}
+              <Link
+                href="/login"
+                className="font-semibold text-green-700 hover:underline"
+              >
+                Log in
+              </Link>
+            </p>
           </div>
         </div>
         <Image

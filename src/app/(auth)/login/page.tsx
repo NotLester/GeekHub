@@ -18,9 +18,15 @@ export default function Page() {
           <h1 className="text-center text-3xl font-bold">Login to BugBook</h1>
           <div className="space-y-5">
             <LoginForm />
-            <Link href="/signup" className="block text-center hover:underline">
-              Don&apos;t have an account? Sign up
-            </Link>
+            <p className="block text-center">
+              Don&apos;t have an account?{" "}
+              <Link
+                href="/signup"
+                className="font-semibold text-green-700 hover:underline"
+              >
+                Sign up
+              </Link>
+            </p>
           </div>
         </div>
         <Image
