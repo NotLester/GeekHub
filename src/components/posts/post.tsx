@@ -11,6 +11,7 @@ import { Media } from '@prisma/client';
 import Linkify from '../linkify';
 import UserAvatar from '../user-avatar';
 import UserTooltip from '../user-tooltip';
+import LikeButton from './like-button';
 import PostMoreButton from './post-more-button';
 
 interface PostProps {
@@ -60,6 +61,14 @@ export default function Post({ post }: PostProps) {
       {!!post.attachments.length && (
         <MediaPreviews attachments={post.attachments} />
       )}
+      <hr className="text-muted-foreground" />
+      <LikeButton
+        postId={post.id}
+        initialState={{
+          likes: post._count.likes,
+          isLikedByUser: post.likes.some((l) => l.userId === user.id),
+        }}
+      />
     </article>
   );
 }
