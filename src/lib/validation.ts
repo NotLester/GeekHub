@@ -17,6 +17,9 @@ export const loginSchema = z.object({
 
 export const createPostSchema = z.object({
   content: requiredString,
+  mediaIds: z
+    .array(z.string())
+    .max(5, { message: "Cannot have more than 5 attachments" }),
 });
 
 export const updateUserProfileSchema = z.object({
