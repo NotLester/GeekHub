@@ -5,18 +5,19 @@ import { InfiniteData, QueryFilters, useMutation, useQueryClient } from '@tansta
 
 import { submitPost } from './actions';
 
-export const useSubmitPostMutation = () => {
+export function useSubmitPostMutation() {
   const { toast } = useToast();
+
   const queryClient = useQueryClient();
+
   const { user } = useSession();
 
-  return useMutation({
-    mutationKey: [],
+  const mutation = useMutation({
     mutationFn: submitPost,
     onSuccess: async (newPost) => {
       const queryFilter = {
         queryKey: ["post-feed"],
-        predicate: (query) => {
+        predicate(query) {
           return (
             query.queryKey.includes("for-you") ||
             (query.queryKey.includes("user-posts") &&
@@ -24,11 +25,14 @@ export const useSubmitPostMutation = () => {
           );
         },
       } satisfies QueryFilters;
+
       await queryClient.cancelQueries(queryFilter);
+
       queryClient.setQueriesData<InfiniteData<PostsPage, string | null>>(
         queryFilter,
         (oldData) => {
           const firstPage = oldData?.pages[0];
+
           if (firstPage) {
             return {
               pageParams: oldData.pageParams,
@@ -43,22 +47,26 @@ export const useSubmitPostMutation = () => {
           }
         },
       );
+
       queryClient.invalidateQueries({
         queryKey: queryFilter.queryKey,
-        predicate: (query) => {
+        predicate(query) {
           return queryFilter.predicate(query) && !query.state.data;
         },
       });
+
       toast({
-        description: "Posted successfully",
+        description: "Post created",
       });
     },
-    onError: (error) => {
+    onError(error) {
       console.error(error);
       toast({
         variant: "destructive",
-        description: "Failed to post. Please try again",
+        description: "Failed to post. Please try again.",
       });
     },
   });
-};
+
+  return mutation;
+}

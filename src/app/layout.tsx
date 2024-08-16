@@ -2,9 +2,12 @@ import './globals.css';
 
 import { ThemeProvider } from 'next-themes';
 import localFont from 'next/font/local';
+import { extractRouterConfig } from 'uploadthing/server';
 
 import { Toaster } from '@/components/ui/toaster';
+import { NextSSRPlugin } from '@uploadthing/react/next-ssr-plugin';
 
+import { fileRouter } from './api/uploadthing/core';
 import ReactQueryProvider from './react-query-provider';
 
 import type { Metadata } from "next";
@@ -33,6 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <NextSSRPlugin routerConfig={extractRouterConfig(fileRouter)} />
         <ReactQueryProvider>
           <ThemeProvider
             attribute="class"
