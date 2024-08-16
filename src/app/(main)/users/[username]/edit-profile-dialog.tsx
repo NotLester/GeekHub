@@ -2,7 +2,7 @@ import Image, { StaticImageData } from 'next/image';
 import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import AvatarPlaceholder from '@/assets/';
+import AvatarPlaceholder from '@/assets/avatar-placeholder.png';
 import LoadingButton from '@/components/loading-button';
 import {
     Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle
@@ -63,7 +63,7 @@ export default function EditProfileDialog({
               </DialogHeader>
               <div className='space-y-1.5'>
                   <Label>Avatar</Label>
-                  <AvatarInput src={} />
+                  <AvatarInput src={croppedAvatar ? URL.createObjectURL(croppedAvatar) : user.avatarUrl || AvatarPlaceholder} onImageCropped={setCroppedAvatar} />
               </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
