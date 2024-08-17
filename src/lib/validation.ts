@@ -27,6 +27,10 @@ export const updateUserProfileSchema = z.object({
   bio: z.string().max(1000, { message: "Must be at most 1000 characters" }),
 });
 
+export const createCommentSchema = z.object({
+  content: requiredString,
+});
+
 export type SignUpValues = z.infer<typeof signUpSchema>;
 export type LoginValues = z.infer<typeof loginSchema>;
 export type UpdateUserProfileValues = z.infer<typeof updateUserProfileSchema>;

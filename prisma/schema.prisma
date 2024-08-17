@@ -28,6 +28,7 @@ model User {
   posts        Post[]
   likes        Like[]
   bookmarks    Bookmark[]
+  comments     Comment[]
 
   following Follow[] @relation("Following")
   followers Follow[] @relation("Followers")
@@ -65,6 +66,7 @@ model Post {
   attachments Media[]
   likes       Like[]
   bookmarks   Bookmark[]
+  comments    Comment[]
 
   @@map("posts")
 }
@@ -101,6 +103,18 @@ model Bookmark {
 
   @@unique([userId, postId])
   @@map("bookmarks")
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@map("comments")
 }
 
 enum MediaType {
