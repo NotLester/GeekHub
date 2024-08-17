@@ -7,6 +7,7 @@ import { redirect } from 'next/navigation';
 
 import { lucia } from '@/auth';
 import prisma from '@/lib/prisma';
+import streamServerClient from '@/lib/stream';
 import { signUpSchema, SignUpValues } from '@/lib/validation';
 import { hash } from '@node-rs/argon2';
 
@@ -55,14 +56,21 @@ export async function signUp(
       };
     }
 
-    await prisma.user.create({
-      data: {
+    await prisma.$transaction(async (tx) => {
+      await tx.user.create({
+        data: {
+          id: userId,
+          username,
+          email,
+          displayName: username,
+          passwordHash,
+        },
+      });
+      await streamServerClient.upsertUser({
         id: userId,
-        username,
-        email,
-        displayName: username,
-        passwordHash,
-      },
+        username: username,
+        name: username,
+      });
     });
 
     const session = await lucia.createSession(userId, {});
