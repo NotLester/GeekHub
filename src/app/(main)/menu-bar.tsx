@@ -1,4 +1,4 @@
-import { Bookmark, Home, Mail } from 'lucide-react';
+import { Bookmark, Home } from 'lucide-react';
 import Link from 'next/link';
 
 import { validateRequest } from '@/auth';
@@ -30,7 +30,6 @@ export default async function MenuBar({ className }: MenuBarProps) {
     (await streamServerClient.getUnreadCount(user.id)).total_unread_count,
   ]);
 
-
   return (
     <div className={className}>
       <Button
@@ -52,17 +51,6 @@ export default async function MenuBar({ className }: MenuBarProps) {
           unreadCount: unreadMessagesCount,
         }}
       />
-      <Button
-        variant="ghost"
-        className="flex items-center justify-start gap-3"
-        title="Messages"
-        asChild
-      >
-        <Link href="/messages">
-          <Mail />
-          <span className="hidden lg:inline">Messages</span>
-        </Link>
-      </Button>
       <Button
         variant="ghost"
         className="flex items-center justify-start gap-3"
