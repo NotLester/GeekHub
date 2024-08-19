@@ -29,7 +29,7 @@ export default function Page() {
               Don&apos;t have an account?{" "}
               <Link
                 href="/signup"
-                className="font-semibold text-green-700 hover:underline"
+                className="font-semibold text-blue-700 hover:underline"
               >
                 Sign up
               </Link>

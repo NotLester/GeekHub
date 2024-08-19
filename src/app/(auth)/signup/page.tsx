@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import SignUpImage from '@/assets/signup-image.jpg';
 
+import GoogleSignInButton from '../login/google/google-sign-in-button';
 import SignUpForm from './sign-up-form';
 
 export const metadata: Metadata = {
@@ -19,17 +20,23 @@ export default function Page() {
             <h1 className="text-3xl font-bold">Sign Up to geekHub</h1>
             <p className="text-muted-foreground">
               A place where{" "}
-              <span className="font-semibold italic text-green-700">you</span>{" "}
-              can find a friend
+              <span className="font-semibold italic text-blue-700">you</span>{" "}
+              can find your geekster
             </p>
           </div>
           <div className="space-y-5">
+            <GoogleSignInButton />
+            <div className="flex items-center gap-3">
+              <div className="h-px flex-1 bg-muted" />
+              <span>OR</span>
+              <div className="h-px flex-1 bg-muted" />
+            </div>
             <SignUpForm />
             <p className="block text-center">
               Already have an account?{" "}
               <Link
                 href="/login"
-                className="font-semibold text-green-700 hover:underline"
+                className="font-semibold text-blue-700 hover:underline"
               >
                 Log in
               </Link>

@@ -173,7 +173,7 @@ function UserResult({ user, selected, onClick }: UserResultProps) {
           <p className="text-muted-foreground">{user.username}</p>
         </div>
       </div>
-      {selected && <Check className="size-5 text-green-500" />}
+      {selected && <Check className="size-5 text-blue-500" />}
     </button>
   );
 }
