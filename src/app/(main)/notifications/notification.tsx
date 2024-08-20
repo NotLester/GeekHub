@@ -1,4 +1,4 @@
-import { HeartIcon, MessageCircle, User2 } from 'lucide-react';
+import { Contact, HeartIcon, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
 
 import UserAvatar from '@/components/user-avatar';
@@ -21,7 +21,7 @@ export default function Notification({ notification }: NotificationProps) {
   > = {
     FOLLOW: {
       message: `${notification.issuer.displayName} followed you`,
-      icon: <User2 className="size-7 text-primary" />,
+      icon: <Contact className="size-7 text-primary" />,
       href: `/users/${notification.issuer.username}`,
     },
     COMMENT: {
@@ -42,11 +42,13 @@ export default function Notification({ notification }: NotificationProps) {
     <Link href={href} className="block">
       <article
         className={cn(
-          "flex gap-3 rounded-2xl bg-card p-5 shadow-sm transition-colors hover:bg-card/70",
+          "line flex gap-3 rounded-2xl bg-card p-5 shadow-sm transition-colors hover:bg-card/70",
           !notification.read && "bg-primary/10",
         )}
       >
-        <div className="my-1">{icon}</div>
+        <div className="border-r border-r-gray-300 pr-2 pt-4">
+          <div className="my-1">{icon}</div>
+        </div>
         <div className="space-y-3">
           <UserAvatar avatarUrl={notification.issuer.avatarUrl} size={36} />
           <div>

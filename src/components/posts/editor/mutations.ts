@@ -50,7 +50,7 @@ export function useSubmitPostMutation() {
 
       queryClient.invalidateQueries({
         queryKey: queryFilter.queryKey,
-        predicate(query) {
+        predicate: (query) => {
           return queryFilter.predicate(query) && !query.state.data;
         },
       });
@@ -59,7 +59,7 @@ export function useSubmitPostMutation() {
         description: "Post created",
       });
     },
-    onError(error) {
+    onError: (error) => {
       console.error(error);
       toast({
         variant: "destructive",
