@@ -8,7 +8,6 @@ import FollowButton from '@/components/follow-button';
 import FollowerCount from '@/components/follower-count';
 import Linkify from '@/components/linkify';
 import TrendsSidebar from '@/components/trends-sidebar';
-import { Button } from '@/components/ui/button';
 import UserAvatar from '@/components/user-avatar';
 import prisma from '@/lib/prisma';
 import { FollowerInfo, getUserDataSelect, UserData } from '@/lib/types';

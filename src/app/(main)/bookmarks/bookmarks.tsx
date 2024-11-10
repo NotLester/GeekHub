@@ -11,7 +11,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 export default function Bookmarks() {
   const {
-    data,
+    data: posts,
     fetchNextPage,
     hasNextPage,
     isFetching,
@@ -30,9 +30,8 @@ export default function Bookmarks() {
         .json<PostsPage>(),
     initialPageParam: null as string | null,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
+    select: (data) => data.pages.flatMap((page) => page.posts),
   });
-
-  const posts = data?.pages.flatMap((page) => page.posts) || [];
 
   if (isPending) {
     return <PostsLoadingSkeleton />;

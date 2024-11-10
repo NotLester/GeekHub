@@ -32,7 +32,7 @@ export function useSubmitCommentMutation(postId: string) {
           }
         },
       );
-      queryClient.invalidateQueries({
+      await queryClient.invalidateQueries({
         queryKey: queryKey,
         predicate: (query) => {
           return !query.state.data;
